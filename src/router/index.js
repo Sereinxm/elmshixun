@@ -16,6 +16,10 @@ const routes = [
     path: "/login", //登录
     component:()=>import("../views/Login.vue"),
   },
+  {
+    path: "/city",
+    component:()=>import("../views/SearchCity.vue"),
+  }
 ]
 
 const router = new VueRouter({

@@ -9,13 +9,13 @@
 
       <ul class="current-city">
           <p class="title">当前城市:</p>
-          <li>{{currentCity.name}}</li>
+          <li @click="chooseCity(currentCity)">{{currentCity.name}}</li>
       </ul>
 <!--      热门城市-->
       <p class="title">热门城市:</p>
 
       <ul class="hot-city">
-          <li v-for="(v,i) in hotCity" v-bind:key="i">
+          <li v-for="(v,i) in hotCity" v-bind:key="i" @click="chooseCity(v)">
               {{v.name}}
           </li>
       </ul>
@@ -23,7 +23,7 @@
       <ul class="all-city">
           <div v-for="(v,i) in allKey" v-bind:key="i">
               <h3>{{v}}</h3>
-                  <li v-for="(obj,index) in allCity[v]" v-bind:key="index">
+                  <li  v-for="(obj,index) in allCity[v]" v-bind:key="100+index+v" @click="chooseCity(obj)">
                       {{obj.name}}
                   </li>
           </div>
@@ -73,7 +73,15 @@ export default {
         enterLoginPage(){
             //进入登录页面
             this.$router.push("/login");
-        }
+        },
+      chooseCity(cityObj){
+            //将当前城市存储到本地
+          localStorage.setItem("city",JSON.stringify(cityObj));
+          //返回上一页
+          this.$router.push("/city");
+      }
+
+
     },
 
 }
