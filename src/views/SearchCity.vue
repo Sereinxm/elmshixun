@@ -45,7 +45,7 @@
       submitAction() {
         console.log(this.cityObj.id);
         console.log(this.msg);
-        this.axios.get("https://elm.cangdu.org/v1/pois?type=search&city_id="
+        this.axios.get("/elm/v1/pois?type=search&city_id="
             + this.cityObj.id + "&keyword=" + this.msg).then(res => {
           this.shopArray=res.data;
         })
