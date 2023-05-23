@@ -16,9 +16,6 @@
         <p>{{obj.address}}</p>
       </li>
     </ul>
-
-
-
   </div>
 
 
