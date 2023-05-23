@@ -4,7 +4,18 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 const routes = [
-
+  {
+    path: "/",
+    redirect:"/home"
+  },
+  {
+    path: "/home", //首页
+    component:()=>import("../views/CityList.vue"),
+  },
+  {
+    path: "/login", //登录
+    component:()=>import("../views/Login.vue"),
+  },
 ]
 
 const router = new VueRouter({
