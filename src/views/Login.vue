@@ -45,12 +45,12 @@ export default {
       this.inputType =! value?"password":"text";
     },
     changYanZheng(){
-      this.axios.post("https://elm.cangdu.org/v1/captchas").then(res=>{
+      this.axios.post("/elm/v1/captchas").then(res=>{
         this.captchasSrc = res.data.code;
       })
     },
     loginAction(){
-      this.axios.post("https://elm.cangdu.org/v2/login",{
+      this.axios.post("/elm/v2/login",{
         username:this.username,
         password:this.password,
         captcha_code:this.captch
@@ -64,7 +64,7 @@ export default {
   },
   created() {
       //请求验证码
-    this.axios.post("https://elm.cangdu.org/v1/captchas").then(res=>{
+    this.axios.post("/elm/v1/captchas").then(res=>{
       console.log(res);
       this.captchasSrc = res.data.code;
       // this.$router.back();
