@@ -6,9 +6,13 @@ import axios from "axios";
 import VueAxios from "vue-axios";
 import {Icon,Switch ,Button} from "vant";
 import "vant/lib/index.css";
+import {Tabbar,TabbarItem} from "vant";
+
 Vue.use(Icon);
 Vue.use(Switch);
 Vue.use(Button);
+Vue.use(Tabbar);
+Vue.use(TabbarItem);
 
 
 Vue.config.productionTip = false
