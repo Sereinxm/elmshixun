@@ -11,7 +11,7 @@
     </div>
 <!--    展示搜索到的店铺信息-->
     <ul class="shop-list">
-      <li v-for="(obj,i) in shopArray">
+      <li v-for="(obj,i) in shopArray" @click="enterWaiMaiPage">
         <p>{{obj.name}}</p>
         <p>{{obj.address}}</p>
       </li>
@@ -37,7 +37,6 @@
       this.currentCity = cityObj.name;
       this.cityObj= cityObj;
     },
-
     methods:{
       returnLastPage() {
         this.$router.back();
@@ -50,6 +49,11 @@
           this.shopArray=res.data;
         })
 
+      },
+      enterWaiMaiPage(obj){
+        //将点击的位置存储到本地
+        localStorage.setItem("location",JSON.stringify(obj));
+        this.$router.push("/tabbar");
       }
 
     }
