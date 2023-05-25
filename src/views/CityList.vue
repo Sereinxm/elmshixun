@@ -23,7 +23,7 @@
       <ul class="all-city">
           <div v-for="(v,i) in allKey" v-bind:key="i">
               <h3>{{v}}</h3>
-                  <li  v-for="(obj,index) in allCity[v]" v-bind:key="100+index+v" @click="chooseCity(obj)">
+                  <li  v-for="(obj,index) in allCity[v]"  @click="chooseCity(obj)">
                       {{obj.name}}
                   </li>
           </div>
