@@ -58,7 +58,7 @@ export default {
         console.log(res);
         //将登录成功的用户信息存储到本地
         localStorage.setItem("user",JSON.stringify(res.data));
-
+        this.$router.push('/tabbar/mine');
       })
     },
   },
