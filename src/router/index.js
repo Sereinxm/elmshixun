@@ -70,6 +70,39 @@ const routes = [
   },
 
 
+//我的模块中的路由
+  //账户信息
+  {
+    path:"/user/info",
+    component:()=>import("../components/Mine/UserInfo.vue"),
+  },
+  {
+    path:"/user/edit/name",
+    component:()=>import("../components/Mine/EditUsername.vue"),
+  },
+  {
+    path: "/user/edit/address",
+    component:()=>import("../components/Mine/EditAddress.vue"),
+  },
+  {
+    path:"/new/address",
+    component:()=>import("../components/Mine/NewAddress.vue"),
+  },
+  {
+    path: "/new/address/search",
+    component:()=>import("../components/Mine/SearchAddress.vue"),
+  },
+  {
+    path:"/user/edit/password",
+    component:()=>import("../components/Mine/EditPassword.vue"),
+  },
+  {
+    path:"/WaiMai/detail",
+    component:()=>import("../components/WaiMai/Detail.vue"),
+  }
+
+
+
 
 
 
