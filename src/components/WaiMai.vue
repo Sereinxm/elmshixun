@@ -27,7 +27,7 @@
         <div class="center">
           <strong>{{obj.name}}</strong>
           <strong>{{obj.rating}}</strong>
-          <van-rate v-model="obj.rating" allow-half="true" readonly="true" size="12" color="#ff9a0d"/>
+          <van-rate v-model="obj.rating" :allow-half="true" :readonly="true" size="12" color="#ff9a0d"/>
           <span>{{obj.rating}}</span>
           <span>月售{{ obj.recent_order_num }}单</span>
           <p>

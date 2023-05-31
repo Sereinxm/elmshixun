@@ -13,7 +13,7 @@
           <span>{{obj.description}}</span>
         </p>
         <li v-for="(food,j) in obj.foods">
-          <img src="'https://elm.cangdu.org/img/'+food.image_path" alt="">
+          <img :src="'https://elm.cangdu.org/img/'+food.image_path" alt="">
           <div class="text">
             <h3>{{food.name}}</h3>
             <p class="desc">{{food.description}}</p>

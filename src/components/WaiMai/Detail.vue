@@ -1,9 +1,9 @@
 <template>
   <div class="detail">
-    <div class="nav" :style="{'background-image': 'url(http://elm.cangdu.org/img/'+shopObj.image_path+')'}">
+    <div class="nav" :style="{'background-image': 'url(https://elm.cangdu.org/img/'+shopObj.image_path+')'}">
       <div class="header">
         <van-icon @click="()=>{this.$router.back()}" class="icon" name="arrow-left" size="23" color="#fff"/>
-        <img :src="'http://elm.cangdu.org/img/'+shopObj.image_path" alt=""/>
+        <img :src="'https://elm.cangdu.org/img/'+shopObj.image_path" alt=""/>
         <div class="center">
           <h3>{{shopObj.name}}</h3>
           <p>商家配送/分钟送达/配送费￥{{shopObj.float_delivery_fee}}</p>

@@ -71,8 +71,8 @@ export default {
       this.$router.back();
     },
     enterUserInfo(){
-      if(!this.user){
-        this.$router.push("user/info");
+      if(this.user){
+        this.$router.push("/user/info");
       }else {
         this.$router.push("/login");
       }
