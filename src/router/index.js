@@ -99,8 +99,11 @@ const routes = [
   {
     path:"/WaiMai/detail",
     component:()=>import("../components/WaiMai/Detail.vue"),
+  },
+  {
+    path:"/detail/sure",
+    component:()=>import("../components/Detail/SureOrder.vue"),
   }
-
 
 
 
