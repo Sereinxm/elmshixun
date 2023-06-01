@@ -1,91 +1,96 @@
 <template>
-      <div class="waimai">
-        <div class="nav">
-          <van-icon class="icon" @click="enterSerachPage" name="search" color="#fff" size="25"/>
-          <p class="location">
-            {{locationObj.name}}
-          </p>
-          <van-icon class="icon" @click="enterMinePage" name="contact" color="#fff" size="25"/>
-        </div>
-<!--        内容的开始-->
-        <div class="type">
-          <ul>
-            <li v-for="(obj,i) in typeArray" :key="i">
-              <img :src="'http://fuss10.elemecdn.com/'+obj.image_url" alt="">
-              <p>{{obj.title}}</p>
-            </li>
-          </ul>
-        </div>
-<!--        附件商家-->
-        <ul class="shop">
-          <div>
-            <van-icon name="location-o" size="20" color="#666"/>
-            附件商家
-          </div>
-          <li v-for="(obj,i) in allShop" :key="i">
-              <img :src="'/elm/img/'+obj.image_path" alt="">
-            <div class="center">
-              <strong>{{obj.name}}</strong>
-              <strong>{{obj.rating}}</strong>
-              <van-rate v-model="obj.rating" allow-half="true" readonly="true" size="12" color="#ff9a0d"/>
-              <span>{{obj.rating}}</span>
-              <span>月售{{ obj.recent_order_num }}单</span>
-              <p>
-                ¥{{obj.float_minimum_order_amount}}起送/
-                配送费¥{{obj.float_delivery_fee}}
-              </p>
-            </div>
-            <div class="right">
-              <p class="first">
-                <span>保</span>
-                <span>准</span>
-                <span>票</span>
-              </p>
-              <p class="second">
-                <span>蜂鸟专送</span>
-                <span>准时达</span>
-              </p>
-              <p>
-                {{obj.distance}}公里/
-                <span>{{obj.order_lead_time}}</span>
-              </p>
-            </div>
-          </li>
-        </ul>
+  <div class="waimai">
+    <div class="nav">
+      <van-icon class="icon" @click="enterSerachPage" name="search" color="#fff" size="25"/>
+      <p class="location">
+        {{locationObj.name}}
+      </p>
+      <van-icon class="icon" @click="enterMinePage" name="contact" color="#fff" size="25"/>
+    </div>
+    <!--        内容的开始-->
+    <div class="type">
+      <ul>
+        <li v-for="(obj,i) in typeArray" :key="i">
+          <img :src="'http://fuss10.elemecdn.com/'+obj.image_url" alt="">
+          <p>{{obj.title}}</p>
+        </li>
+      </ul>
+    </div>
+    <!--        附件商家-->
+    <ul class="shop">
+      <div>
+        <van-icon name="location-o" size="20" color="#666"/>
+        附件商家
       </div>
+      <li v-for="(obj,i) in allShop" :key="i" @click="enterShopDetail(obj)">
+        <img :src="'/elm/img/'+obj.image_path" alt="">
+        <div class="center">
+          <strong>{{obj.name}}</strong>
+          <strong>{{obj.rating}}</strong>
+          <van-rate v-model="obj.rating" :allow-half="true" :readonly="true" size="12" color="#ff9a0d"/>
+          <span>{{obj.rating}}</span>
+          <span>月售{{ obj.recent_order_num }}单</span>
+          <p>
+            ¥{{obj.float_minimum_order_amount}}起送/
+            配送费¥{{obj.float_delivery_fee}}
+          </p>
+        </div>
+        <div class="right">
+          <p class="first">
+            <span>保</span>
+            <span>准</span>
+            <span>票</span>
+          </p>
+          <p class="second">
+            <span>蜂鸟专送</span>
+            <span>准时达</span>
+          </p>
+          <p>
+            {{obj.distance}}公里/
+            <span>{{obj.order_lead_time}}</span>
+          </p>
+        </div>
+      </li>
+    </ul>
+  </div>
 </template>
 <script>
-      export default {
-        name:"WaiMain",
-        data:function (){
-          return{
-            locationObj:{},
-            typeArray:[],
-            allShop:[],
-          }
-        },
-        methods:{
-          enterSerachPage(){
-            this.$router.push("/tabbar/search");
-          },
-          enterMinePage(){
-            this.$router.push("/tabbar/mine");
-          }
-        },
-        created() {
-          //取出定位对象
-          this.locationObj = JSON.parse(localStorage.getItem("location"));
-          //请求分类数据
-          this.axios.get("/elm/v2/index_entry").then(res=>{
-            this.typeArray = res.data;
-          });
-          //请求所有店铺数据
-          this.axios.get("/elm/shopping/restaurants?latitude="+this.locationObj.latitude+"&longitude="+this.locationObj.longitude).then(res=>{
-            this.allShop = res.data;
-          })
+export default {
+  name:"WaiMain",
+  data:function (){
+    return{
+      locationObj:{},
+      typeArray:[],
+      allShop:[],
+    }
+  },
+  methods:{
+    enterSerachPage(){
+      this.$router.push("/tabbar/search");
+    },
+    enterMinePage(){
+      this.$router.push("/tabbar/mine");
+    },
+    enterShopDetail(obj){
+      localStorage.setItem("shop_id",obj.id);
+      localStorage.setItem("shop_obj",JSON.stringify(obj));
+      this.$router.push("/waimai/detail");
+    }
+  },
+  created() {
+    //取出定位对象
+    this.locationObj = JSON.parse(localStorage.getItem("location"));
+    //请求分类数据
+    this.axios.get("/elm/v2/index_entry").then(res=>{
+      this.typeArray = res.data;
+    });
+    //请求所有店铺数据
+    this.axios.get("/elm/shopping/restaurants?latitude="+this.locationObj.latitude+"&longitude="+this.locationObj.longitude).then(res=>{
+      this.allShop = res.data;
+    })
 
-        }
-      }
+  }
+}
 </script>
 <style scoped>
 

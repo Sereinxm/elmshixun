@@ -3,7 +3,8 @@
 <!--      顶部导航栏-->
     <div class="nav">
       <p class="fl">ele.me</p>
-      <p class="fr" v-on:click="enterLoginPage">注册/登录</p>
+      <van-icon v-if="loginStatus==1" class="icon fr" @click="enterMinePage" name="contact" color="#fff" size="25"/>
+      <p class="fr" v-else v-on:click="enterLoginPage">注册/登录</p>
     </div>
 <!--      当前城市-->
 
@@ -23,7 +24,7 @@
       <ul class="all-city">
           <div v-for="(v,i) in allKey" v-bind:key="i">
               <h3>{{v}}</h3>
-                  <li  v-for="(obj,index) in allCity[v]" v-bind:key="100+index+v" @click="chooseCity(obj)">
+                  <li  v-for="(obj,index) in allCity[v]"  @click="chooseCity(obj)">
                       {{obj.name}}
                   </li>
           </div>
@@ -44,12 +45,18 @@ export default {
             currentCity:"郑州",
             hotCity:[],
             allCity:{},
-            allKey:[]//存储排序后的ABCD
+            allKey:[],//存储排序后的ABCD
+          //定义变量 记录用户状态默认0 表示未登录
+            loginStatus:0,
+
         }
     },
     //组件的生命周期方法 自动执行
     //组件创建成功后自动执行
     created(){
+      //先进内存中查看是否有用户登录的信息
+        var user=JSON.parse(localStorage.getItem("user"));
+        this.loginStatus=user.id!=null?1:0;
         //1.请求当前的定位城市
         this.axios.get("https://elm.cangdu.org/v1/cities?type=guess").then(res=>{
             //res中存储的是响应的数据
@@ -79,7 +86,12 @@ export default {
           localStorage.setItem("city",JSON.stringify(cityObj));
           //返回上一页
           this.$router.push("/city");
+      },
+      enterMinePage(){
+          //进入个人中心页面
+          this.$router.push("/tabbar/mine");
       }
+
 
 
     },
@@ -102,6 +114,10 @@ export default {
     color: white;
     line-height: 45px;
 
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 2%;
 }
 .fl{
     float: left;
